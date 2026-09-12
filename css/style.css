@@ -1,0 +1,631 @@
+
+:root {
+  --cor-fundo: #ffffff;
+  --cor-fundo-alt: #f5f5f4;
+  --cor-texto: #1c1c1c;
+  --cor-texto-suave: #5a5a5a;
+  --cor-borda: #e0e0e0;
+  --cor-destaque: #2f6f5e;      /* usada em links e botões */
+  --cor-destaque-hover: #234f43;
+  --cor-blur-1: #9b9b9b;
+  --cor-blur-2: #9b9b9b;
+  --cor-blur-3: #d9d9d92b;
+
+  --fonte-principal: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+
+  --largura-maxima: 1200px;
+  --altura-cabecalho: 64px;
+  --altura-maxima-carrossel: 460px;
+}
+
+
+[data-theme="dark"] {
+  --cor-fundo: #121212;
+  --cor-fundo-alt: #1e1e1e;
+  --cor-texto: #f0f0f0;
+  --cor-texto-suave: #b3b3b3;
+  --cor-borda: #333333;
+  --cor-destaque: #5fb8a0;
+  --cor-destaque-hover: #7fcab5;
+}
+
+/* ==========================================================
+   BASE
+========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-principal);
+  color: var(--cor-texto);
+  background-color: var(--cor-fundo);
+  line-height: 1.6;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+a {
+  color: var(--cor-destaque);
+  text-decoration: none;
+}
+
+a:hover,
+a:focus {
+  color: var(--cor-destaque-hover);
+  text-decoration: underline;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--cor-destaque);
+  outline-offset: 2px;
+}
+
+h1, h2 {
+  margin: 0;
+}
+
+/* ==========================================================
+   CABEÇALHO
+========================================================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: var(--altura-cabecalho);
+  background-color: var(--cor-fundo);
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.site-header-inner {
+  max-width: var(--largura-maxima);
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-logo {
+  font-weight: 600;
+  color: var(--cor-texto);
+}
+
+.site-logo:hover {
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.site-nav a {
+  color: var(--cor-texto-suave);
+}
+
+.site-nav a:hover {
+  color: var(--cor-destaque);
+}
+
+.theme-toggle {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: 1px solid var(--cor-borda);
+  border-radius: 4px;
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--cor-texto);
+}
+
+.theme-toggle:hover {
+  border-color: var(--cor-destaque);
+}
+
+/* ==========================================================
+   SEÇÃO 1: HERO / APRESENTAÇÃO
+========================================================== */
+.hero {
+  min-height: calc(100vh - var(--altura-cabecalho));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  text-align: center;
+}
+
+.hero-blur-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.blur-shape {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.55;
+}
+
+.blur-shape-1 {
+  width: 380px; height: 380px;
+  top: -120px; left: -100px;
+  background-color: var(--cor-blur-1);
+  animation: flutuar-blur-1 13s ease-in-out infinite;
+}
+
+.blur-shape-2 {
+  width: 420px; height: 420px;
+  bottom: -160px; right: -120px;
+  background-color: var(--cor-blur-2);
+  animation: flutuar-blur-2 16s ease-in-out infinite;
+}
+
+.blur-shape-3 {
+  width: 300px; height: 300px;
+  top: 45%; left: 55%;
+  background-color: var(--cor-blur-3);
+  animation: flutuar-blur-3 11s ease-in-out infinite;
+}
+
+/* Em telas pequenas as manchas ficam proporcionalmente muito grandes
+   perto do conteúdo e atrapalham a leitura — aqui elas ficam menores,
+   mais discretas e concentradas nos cantos, longe do texto central. */
+@media (max-width: 720px) {
+  .blur-shape {
+    opacity: 0.35;
+    filter: blur(60px);
+  }
+
+  .blur-shape-1 {
+    width: 200px;
+    height: 200px;
+    top: -60px;
+    left: -70px;
+  }
+
+  .blur-shape-2 {
+    width: 200px;
+    height: 200px;
+    bottom: -70px;
+    right: -70px;
+  }
+
+  .blur-shape-3 {
+    display: none;
+  }
+}
+
+@keyframes flutuar-blur-1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,30px)} }
+@keyframes flutuar-blur-2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-40px)} }
+@keyframes flutuar-blur-3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,25px)} }
+
+.hero-content {
+  max-width: 680px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-photo,
+.hero-photo-fallback {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--cor-borda);
+}
+
+.hero-photo-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--cor-fundo-alt);
+  color: var(--cor-texto-suave);
+  font-size: 3rem;
+}
+
+.hero-name {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.hero-role {
+  margin: 0.4rem 0 1.2rem;
+  color: var(--cor-texto-suave);
+  font-size: 1.1rem;
+}
+
+.hero-bio {
+  color: var(--cor-texto-suave);
+  margin-bottom: 1.5rem;
+}
+
+.hero-contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.hero-scroll {
+  font-size: 0.95rem;
+  border: 1px solid var(--cor-borda);
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+}
+
+.hero-scroll:hover {
+  border-color: var(--cor-destaque);
+  text-decoration: none;
+}
+
+/* ==========================================================
+   SEÇÃO 2: PROJETOS
+========================================================== */
+.projects {
+  max-width: var(--largura-maxima);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 1rem;
+}
+
+.projects-title {
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Cada projeto é uma "gaveta" (elemento <details> nativo do HTML):
+   uma barra com o título que expande ao clicar, sem precisar de
+   JavaScript extra para abrir/fechar. */
+.project-drawer {
+  border-top: 1px solid var(--cor-borda);
+}
+
+.project-drawer:last-child {
+  border-bottom: 1px solid var(--cor-borda);
+}
+
+.project-summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 1.4rem 0.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.project-summary::-webkit-details-marker {
+  display: none;
+}
+
+.project-summary-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.project-summary-arrow {
+  flex-shrink: 0;
+  color: var(--cor-texto-suave);
+  transition: transform 0.2s ease;
+}
+
+.project-drawer[open] .project-summary-arrow {
+  transform: rotate(180deg);
+}
+
+.project-drawer-body {
+  padding: 0 0.25rem 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.project-drawer-media {
+  flex: 1 1 380px;
+  max-width: 460px;
+}
+
+.project-image,
+.project-image-fallback {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 4px;
+  background-color: var(--cor-fundo-alt);
+}
+
+.project-image-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* Carrossel de imagens dentro de cada projeto.
+   O tamanho é dinâmico: cada imagem/vídeo mantém sua própria proporção
+   (nada é cortado), só limitamos uma altura máxima para não ficar
+   gigante quando a imagem for muito alta. */
+.project-carousel {
+  width: 100%;
+}
+
+.project-carousel-viewport {
+  position: relative;
+  width: 100%;
+  max-height: var(--altura-maxima-carrossel);
+  min-height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: var(--cor-fundo-alt);
+}
+
+.project-carousel-midia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-height: var(--altura-maxima-carrossel);
+}
+
+.project-carousel-image {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: var(--altura-maxima-carrossel);
+  object-fit: contain;
+}
+
+.project-carousel-fallback {
+  display: none;
+  position: absolute;
+  inset: 0;
+  align-items: center;
+  justify-content: center;
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--cor-fundo-alt);
+}
+
+.project-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-carousel-arrow:hover {
+  border-color: var(--cor-destaque);
+}
+
+.project-carousel-prev {
+  left: 0.6rem;
+}
+
+.project-carousel-next {
+  right: 0.6rem;
+}
+
+.project-carousel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+}
+
+.project-carousel-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--cor-borda);
+  cursor: pointer;
+}
+
+.project-carousel-dot.active {
+  background-color: var(--cor-destaque);
+}
+
+.project-carousel-caption {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+
+.project-drawer-text {
+  flex: 2 1 380px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project-description {
+  color: var(--cor-texto-suave);
+  margin-bottom: 1rem;
+}
+
+.project-subtitle {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 1.1rem 0 0.3rem;
+}
+
+.project-subtitle:first-of-type {
+  margin-top: 0;
+}
+
+.project-text {
+  color: var(--cor-texto-suave);
+  margin: 0 0 0.6rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
+}
+
+.project-tag {
+  font-size: 0.75rem;
+  color: var(--cor-texto-suave);
+  border: 1px solid var(--cor-borda);
+  border-radius: 3px;
+  padding: 0.15rem 0.5rem;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.9rem;
+}
+
+.projects-empty {
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+
+/* ==========================================================
+   SEÇÃO: TRAJETÓRIA PROFISSIONAL
+========================================================== */
+.experience {
+  max-width: var(--largura-maxima);
+  margin: 0 auto;
+  padding: 4rem 1.5rem 5rem;
+}
+
+.experience-title {
+  font-size: 1.6rem;
+  margin-bottom: 2.5rem;
+  text-align: center;
+}
+
+.experience-timeline {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  max-width: 760px;
+  border-left: 2px solid var(--cor-borda);
+}
+
+.experience-item {
+  position: relative;
+  padding: 0 0 2.5rem 1.75rem;
+}
+
+.experience-item:last-child {
+  padding-bottom: 0;
+}
+
+.experience-item::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 0.3rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--cor-fundo);
+  border: 2px solid var(--cor-destaque);
+}
+
+.experience-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.3rem 1rem;
+}
+
+.experience-cargo {
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.experience-periodo {
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+  white-space: nowrap;
+}
+
+.experience-empresa {
+  color: var(--cor-texto-suave);
+  font-size: 0.95rem;
+  margin: 0.15rem 0 0.6rem;
+}
+
+.experience-descricao {
+  color: var(--cor-texto-suave);
+}
+
+.experience-empty {
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+
+/* ==========================================================
+   RODAPÉ
+========================================================== */
+.footer {
+  text-align: center;
+  padding: 2rem 1.5rem;
+  color: var(--cor-texto-suave);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--cor-borda);
+}
+
+/* ==========================================================
+   ACESSIBILIDADE: reduz animações se o usuário preferir
+========================================================== */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--altura-cabecalho);
+}
