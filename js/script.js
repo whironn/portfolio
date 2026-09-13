@@ -84,7 +84,7 @@ const projetos = [
     linkRepo: "",
     contexto: "Projeto de conclusão do programa trainee realizado em parceria com a oDox Tecnologia, participamos do Scale-up Game, uma simulação de gestão empresarial utilizando o Odoo ERP.",
     solucao: "Nossa equipe montou a SilkTouch, uma livraria online especializada em livros relacionados ao universo do famoso jogo Minecraft, criando uma operação integrada de compras, estoque, vendas e faturamento. O sistema contemplava o fluxo desde a compra e entrada de produtos no estoque até sua venda e faturamento, incluindo documentos e vias impressas gerados a partir das operações realizadas no sistema. Também foram utilizados fornecedores fictícios e movimentações simuladas para analisar o comportamento do estoque e os resultados das operações.",
-    comoFunciona: "Principais funcionalidades e decisões.",
+    comoFunciona: "",
     meuPapel: "Atuei como Gerente de Logística e Produção, trabalhando diretamente na configuração e operação dos módulos relacionados ao estoque e à cadeia de suprimentos. Fui responsável pela criação e organização de produtos e categorias, além da configuração de regras de estoque e reposição, incluindo limites que acionavam novas necessidades de compra. Também acompanhei as baixas e movimentações de estoque e analisei os impactos das operações sobre a disponibilidade dos produtos.",
     tecnologias: "Odoo ERP | E-commerce | Gestão de Estoque | Compras | Vendas | Faturamento  Relatórios",
     aprendizados: "O projeto proporcionou experiência prática com ERP, logística, gestão de estoque, análise de dados e processos empresariais, além da experiência de decisões em equipe com informações produzidas pelo sistema.",
