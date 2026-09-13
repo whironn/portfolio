@@ -105,6 +105,23 @@ h1, h2 {
   font-size: 0.95rem;
 }
 
+/* Com mais itens no menu, em telas estreitas ele vira uma faixa
+   rolável na horizontal em vez de quebrar para uma segunda linha
+   (o que estouraria a altura fixa do cabeçalho). */
+@media (max-width: 720px) {
+  .site-nav {
+    gap: 1rem;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .site-nav::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 .site-nav a {
   color: var(--cor-texto-suave);
 }
@@ -145,6 +162,9 @@ h1, h2 {
   text-align: center;
 }
 
+/* ==========================================================
+   FUNDO COM BLUR AESTHETIC (só a seção inicial da página principal)
+========================================================== */
 .hero-blur-bg {
   position: absolute;
   inset: 0;
@@ -181,9 +201,6 @@ h1, h2 {
   animation: flutuar-blur-3 11s ease-in-out infinite;
 }
 
-/* Em telas pequenas as manchas ficam proporcionalmente muito grandes
-   perto do conteúdo e atrapalham a leitura — aqui elas ficam menores,
-   mais discretas e concentradas nos cantos, longe do texto central. */
 @media (max-width: 720px) {
   .blur-shape {
     opacity: 0.35;
@@ -212,6 +229,98 @@ h1, h2 {
 @keyframes flutuar-blur-1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,30px)} }
 @keyframes flutuar-blur-2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,-40px)} }
 @keyframes flutuar-blur-3 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,25px)} }
+
+/* ==========================================================
+   FUNDO COM FORMAS GEOMÉTRICAS (só as páginas novas: Criações e
+   Projetos Interativos — a página inicial mantém o blur acima)
+   Três elementos com contorno fino (sem preenchimento): um círculo,
+   um losango que gira devagar, e um recorte com linhas diagonais.
+   As cores continuam vindo de --cor-blur-1/2/3, então se você já
+   tinha customizado essas variáveis, a paleta é mantida.
+========================================================== */
+.hero-fx-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.fx-shape {
+  position: absolute;
+}
+
+.fx-circle {
+  width: 340px;
+  height: 340px;
+  top: -90px;
+  left: -80px;
+  border: 1.5px solid var(--cor-blur-1);
+  border-radius: 50%;
+  opacity: 0.5;
+  animation: fx-flutuar-1 14s ease-in-out infinite;
+}
+
+.fx-square {
+  width: 220px;
+  height: 220px;
+  bottom: -60px;
+  right: -40px;
+  border: 1.5px solid var(--cor-blur-2);
+  opacity: 0.45;
+  transform: rotate(20deg);
+  animation: fx-girar 28s linear infinite;
+}
+
+.fx-lines {
+  width: 320px;
+  height: 320px;
+  top: 42%;
+  left: 58%;
+  border-radius: 50%;
+  opacity: 0.4;
+  background-image: repeating-linear-gradient(
+    45deg,
+    var(--cor-blur-3) 0px,
+    var(--cor-blur-3) 1.5px,
+    transparent 1.5px,
+    transparent 20px
+  );
+  -webkit-mask-image: radial-gradient(circle, #000 55%, transparent 100%);
+  mask-image: radial-gradient(circle, #000 55%, transparent 100%);
+  animation: fx-flutuar-2 18s ease-in-out infinite;
+}
+
+/* Em telas pequenas as formas ficam proporcionalmente muito grandes
+   perto do conteúdo e atrapalham a leitura — aqui elas ficam menores,
+   mais discretas e concentradas nos cantos, longe do texto central. */
+@media (max-width: 720px) {
+  .fx-shape {
+    opacity: 0.35;
+  }
+
+  .fx-circle {
+    width: 180px;
+    height: 180px;
+    top: -50px;
+    left: -60px;
+  }
+
+  .fx-square {
+    width: 140px;
+    height: 140px;
+    bottom: -40px;
+    right: -30px;
+  }
+
+  .fx-lines {
+    display: none;
+  }
+}
+
+@keyframes fx-flutuar-1 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,25px)} }
+@keyframes fx-flutuar-2 { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,20px)} }
+@keyframes fx-girar { from{transform:rotate(20deg)} to{transform:rotate(380deg)} }
 
 .hero-content {
   max-width: 680px;
@@ -273,6 +382,40 @@ h1, h2 {
 .hero-scroll:hover {
   border-color: var(--cor-destaque);
   text-decoration: none;
+}
+
+/* ==========================================================
+   BANNER DE PÁGINAS INTERNAS (Criações, Projetos Interativos etc.)
+   Usa o fundo geométrico (.hero-fx-bg / .fx-shape) — diferente do
+   blur da apresentação inicial, para distinguir a página principal
+   das páginas internas.
+========================================================== */
+.page-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 46vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.page-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 680px;
+}
+
+.page-hero-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.page-hero-subtitle {
+  color: var(--cor-texto-suave);
+  font-size: 1.05rem;
 }
 
 /* ==========================================================
@@ -617,11 +760,106 @@ h1, h2 {
 }
 
 /* ==========================================================
+   SEÇÃO: CRIAÇÕES
+   Sequência de itens em zigue-zague (imagem de um lado, texto do
+   outro, alternando a cada item) — vai "crescendo" conforme você
+   adiciona mais itens na lista, em js/criacoes.js.
+========================================================== */
+.criacoes-lista {
+  max-width: var(--largura-maxima);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.criacao-item {
+  display: flex;
+  align-items: center;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+/* Itens pares invertem o lado da imagem, criando o zigue-zague */
+.criacao-item:nth-child(even) {
+  flex-direction: row-reverse;
+}
+
+.criacao-media {
+  flex: 1 1 320px;
+}
+
+.criacao-imagem,
+.criacao-imagem-fallback {
+  width: 100%;
+  max-height: 380px;
+  border-radius: 6px;
+  background-color: var(--cor-fundo-alt);
+}
+
+.criacao-imagem {
+  display: block;
+  object-fit: contain;
+}
+
+.criacao-imagem-fallback {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  height: 260px;
+  color: var(--cor-texto-suave);
+  text-align: center;
+  padding: 1rem;
+}
+
+.criacao-legenda {
+  margin: 0.6rem 0 0;
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+  text-align: center;
+}
+
+.criacao-texto {
+  flex: 1 1 320px;
+}
+
+.criacao-titulo {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.6rem;
+}
+
+.criacao-descricao {
+  color: var(--cor-texto-suave);
+}
+
+.criacoes-empty {
+  text-align: center;
+  color: var(--cor-texto-suave);
+}
+
+/* Em telas estreitas o zigue-zague vira sempre a mesma ordem
+   (imagem em cima, texto embaixo) — alternar lados não cabe bem
+   numa coluna só. */
+@media (max-width: 720px) {
+  .criacao-item,
+  .criacao-item:nth-child(even) {
+    flex-direction: column;
+  }
+}
+
+/* ==========================================================
    ACESSIBILIDADE: reduz animações se o usuário preferir
 ========================================================== */
 @media (prefers-reduced-motion: reduce) {
   * {
     scroll-behavior: auto !important;
+  }
+
+  .fx-shape,
+  .blur-shape {
+    animation: none;
   }
 }
 
