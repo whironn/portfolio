@@ -14,7 +14,7 @@ const experiencias = [
   },
   {
     cargo: "Talento Tech-PR - Formação Profissional em TIC",
-    empresa: "UEPG - Governo do Paraná",
+    empresa: "Governo do Paraná",
     periodo: "06/2024 – 06/2025",
     descricao: "Programa de formação e capacitação profissional em Tecnologia da Informação e Comunicação. Tivemos oportunidades de contato com empresas reais da área, com seminários semanais onde focamos em formação técnica, atividades práticas e desenvolvimento de projetos em parceria com essas empresas. Com formação abrangendo programação, fundamentos de computação, banco de dados, linguagem Python, desenvolvimento Web, engenharia de software, inglês técnico e soft skills.",
   },
