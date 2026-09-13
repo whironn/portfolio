@@ -10,7 +10,7 @@ const criacoes = [
   },
   {
     titulo: "Estande de ADS - Feira de Empreendedorismo",
-    descricao: "Feira de empreendedorismo realizada anualmente no colégio CEJAC, fui representante do ensino médio de Análise e Desenvolvimento de Sistemas durante os três anos de curso, montando apresentações ao público, demonstrações digitais e mostrando a área de TI para o público. ",
+    descricao: "Feira de empreendedorismo realizada anualmente no colégio CEJAC, fui representante do ensino médio de Análise e Desenvolvimento de Sistemas durante os três anos de curso, montando apresentações, demonstrações digitais e mostrando a área de TI para o público. ",
     imagem: {
       src: "images/feiradevscejac.png",
       legenda: "Stand de ADS no CEJAC - 2025",
